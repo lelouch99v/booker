@@ -5,11 +5,13 @@ import (
   "net/http"
 )
 
+const port = "5010"
+
 func handler(w http.ResponseWriter, r *http.Request) {
   fmt.Fprintf(w, "Hello, Booker")
 }
 
 func main() {
   http.HandleFunc("/", handler)
-  http.ListenAndServe(":5010", nil)
+  http.ListenAndServe(":" + port, nil)
 }
