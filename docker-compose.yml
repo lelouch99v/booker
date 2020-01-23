@@ -1,10 +1,23 @@
-version: '3'
+version: '3.7'
 services:
   booker:
     build: .
     tty: true
     volumes:
       - ./:/go/src/booker
+    working_dir: /go/src/booker
+    ports:
+      - "5010:5010"
+    networks:
+      - booker_network
+  booker_dev:
+    build:
+      context: .
+      target: builder
+    tty: true
+    volumes:
+      - ./:/go/src/booker
+    working_dir: /go/src/booker
     ports:
       - "5010:5010"
     networks:

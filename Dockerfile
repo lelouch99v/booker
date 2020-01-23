@@ -3,7 +3,8 @@ ENV SRC_DIR=/go/src/github.com/lelouch99v/booker
 ENV GOBIN=/go/bin
 WORKDIR $GOBIN
 COPY . $SRC_DIR
-RUN cd /go/src && go install github.com/lelouch99v/booker/
+RUN cd /go/src && go install github.com/lelouch99v/booker/ && \
+    apt-get update && apt-get install -y vim
 
 # runtime image
 FROM alpine:latest
