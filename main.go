@@ -1,17 +1,17 @@
 package main
 
 import (
-  "fmt"
-  "net/http"
+	"net/http"
+
+	"github.com/labstack/echo/v4"
 )
 
 const port = "5010"
 
-func handler(w http.ResponseWriter, r *http.Request) {
-  fmt.Fprintf(w, "Hello, Booker")
-}
-
 func main() {
-  http.HandleFunc("/", handler)
-  http.ListenAndServe(":" + port, nil)
+	e := echo.New()
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "hello, booker!")
+	})
+	e.Logger.Fatal(e.Start(":" + port))
 }
