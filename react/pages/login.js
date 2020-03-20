@@ -17,11 +17,15 @@ const Login = () => {
   };
 
   const submit = async () => {
-    const uri = 'http://localhost:5010/auth';
+    const uri = '/api/auth';
     await axios.post(uri, {
       email: email,
       password: password
-    }).then( res => {
+    },
+    {headers: { 
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    }}).then( res => {
       alert('ログイン成功！');
     });
   };
