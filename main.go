@@ -35,6 +35,11 @@ type Response struct {
 	Status  string `json:status`
 }
 
+type AuthInfo struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 func main() {
 	e := echo.New()
 
@@ -49,7 +54,16 @@ func initRouting(e *echo.Echo) {
 	e.GET("/show", show)
 	e.POST("/save", save)
 	e.POST("/users", saveUser)
-	e.POST("send", sendMessage)
+	e.POST("/send", sendMessage)
+	e.POST("/auth", auth)
+}
+
+func auth(c echo.Context) error {
+	authInfo := new(AuthInfo)
+	if err := c.Bind(authInfo); err != nil {
+		return err
+	}
+	return c.JSON(http.StatusOK, authInfo)
 }
 
 func index(c echo.Context) error {

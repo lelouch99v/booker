@@ -1,11 +1,29 @@
-import axios from 'axios';
+import React, { useState } from 'react';
 import '../styles/login.scss';
 import {Container, Row, Col, Form, Button} from 'react-bootstrap';
+import axios from 'axios';
 
 const Login = () => {
 
-  const submit = e => {
-    console.log(e);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmailChange = e => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = e => {
+    setPassword(e.target.value);
+  };
+
+  const submit = async () => {
+    const uri = 'http://localhost:5010/auth';
+    await axios.post(uri, {
+      email: email,
+      password: password
+    }).then( res => {
+      alert('ログイン成功！');
+    });
   };
 
   return (
@@ -19,10 +37,10 @@ const Login = () => {
         <Col>
           <Form className='col-4 offset-4'>
             <Form.Group>
-              <Form.Control type='text' name='id' placeholder='e-mail' />
+              <Form.Control onChange={handleEmailChange} type='text' name='id' placeholder='e-mail' />
             </Form.Group>
             <Form.Group>
-              <Form.Control type='password' name='password' placeholder='password' />
+              <Form.Control onChange={handlePasswordChange} type='password' name='password' placeholder='password' />
             </Form.Group>
             <div className='text-center'>
               <Button onClick={submit} className='w-100'>ログイン</Button>
