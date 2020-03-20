@@ -37,13 +37,19 @@ type Response struct {
 
 func main() {
 	e := echo.New()
+
+	initRouting(e)
+
+	e.Logger.Fatal(e.Start(":" + port))
+}
+
+func initRouting(e *echo.Echo) {
 	e.GET("/", index)
 	e.GET("/users/:name", getUserName)
 	e.GET("/show", show)
 	e.POST("/save", save)
 	e.POST("/users", saveUser)
 	e.POST("send", sendMessage)
-	e.Logger.Fatal(e.Start(":" + port))
 }
 
 func index(c echo.Context) error {
