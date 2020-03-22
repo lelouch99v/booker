@@ -16,6 +16,13 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
+  const handleKeyPress = e => {
+    const ENTER = 13;
+    if (e.keyCode === ENTER) {
+      submit();
+    }
+  };
+
   const submit = async () => {
     const uri = '/api/auth';
     try {
@@ -40,10 +47,10 @@ const Login = () => {
         <Col>
           <Form className='col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2'>
             <Form.Group>
-              <Form.Control onChange={handleEmailChange} type='text' name='id' placeholder='e-mail' />
+              <Form.Control onChange={handleEmailChange} onKeyDown={handleKeyPress} type='text' name='id' placeholder='e-mail' />
             </Form.Group>
             <Form.Group>
-              <Form.Control onChange={handlePasswordChange} type='password' name='password' placeholder='password' />
+              <Form.Control onChange={handlePasswordChange} onKeyDown={handleKeyPress} type='password' name='password' placeholder='password' />
             </Form.Group>
             <div className='text-center'>
               <Button onClick={submit} className='w-100'>ログイン</Button>
