@@ -22,7 +22,7 @@ const Login = () => {
       email: email,
       password: password
     }).then( res => {
-      alert('ログイン成功！');
+      alert(`ログイン成功！\nemail: ${res.data.email}\npassword: ${res.data.password}`);
     });
   };
 
