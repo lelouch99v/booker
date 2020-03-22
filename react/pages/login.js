@@ -38,7 +38,7 @@ const Login = () => {
       </Row>
       <Row>
         <Col>
-          <Form className='col-4 offset-4'>
+          <Form className='col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-xs-8 offset-xs-2'>
             <Form.Group>
               <Form.Control onChange={handleEmailChange} type='text' name='id' placeholder='e-mail' />
             </Form.Group>
