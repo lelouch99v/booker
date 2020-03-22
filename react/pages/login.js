@@ -18,12 +18,15 @@ const Login = () => {
 
   const submit = async () => {
     const uri = '/api/auth';
-    await axios.post(uri, {
-      email: email,
-      password: password
-    }).then( res => {
-      alert(`ログイン成功！\nemail: ${res.data.email}\npassword: ${res.data.password}`);
-    });
+    try {
+      const res = await axios.post(uri, {
+        email: email,
+        password: password
+      });
+      alert(`ログイン成功\nemail: ${res.data.email}\npassword: ${res.data.password}`);
+    } catch (err) {
+      alert('ログイン失敗');
+    }
   };
 
   return (
