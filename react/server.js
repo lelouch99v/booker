@@ -4,6 +4,8 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
+const API_URL = process.env.API_URL || 'http://localhost:5010'
+
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
@@ -13,7 +15,10 @@ app.prepare().then(() => {
   server.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://localhost:5010',
+      target: API_URL,
+      pathRewrite: {
+        "^/api": ""
+      },
       changeOrigin: true
     })
   );

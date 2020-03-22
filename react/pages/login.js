@@ -21,11 +21,7 @@ const Login = () => {
     await axios.post(uri, {
       email: email,
       password: password
-    },
-    {headers: { 
-      'Access-Control-Allow-Origin' : '*',
-      'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-    }}).then( res => {
+    }).then( res => {
       alert('ログイン成功！');
     });
   };
